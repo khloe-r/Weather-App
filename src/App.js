@@ -14,7 +14,6 @@ function App() {
     setCity(event.target.value)
   }
 
-  
   const handleSearch = () => {
     setSearch(city)
   }
