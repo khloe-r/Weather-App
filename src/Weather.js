@@ -1,6 +1,17 @@
 import React, {useState, useEffect} from 'react';
 
 function Weather(props) {
+    const[data, setData] = useState(props.city);
+
+    // useEffect(() => {
+    //     fetch(`https://api.github.com/users/${login}`)
+    //     // Grabs data from api
+    //     .then(response => response.json())
+    //         // Converts to json file
+    //     .then(setData);
+    //         // sets data state to the json
+    // }, [])
+
     return (
       <header>
         <div className="flex justify-center">
