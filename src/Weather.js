@@ -24,7 +24,7 @@ function Hourly(props) {
 
 function Daily(props) {
   const forecastObj = props.forecast?.forecast?.forecastday.map((day, i) => ({id: i, data: day}))
-  console.log(forecastObj)
+  // console.log(forecastObj)
   return (
     <div className="grid grid-cols-3 pt-4">
         {forecastObj?.map((day) => (
@@ -44,9 +44,10 @@ function Weather(props) {
       (daily) => !daily, // defines the function
       true // initial value
     );
-    console.log(props)
+  
     return (
-      <header>
+      <>
+      {props.city.current ? <header>
         <div className="flex justify-center">
             <div className="shadow-xl bg-gray-800 text-white mt-5 p-5 grid grid-cols-3 w-full xl:w-1/3 lg:w-1/3 md:w-1/2">
               <div className="col-span-2">
@@ -75,9 +76,10 @@ function Weather(props) {
                 {daily ? ' Daily ' : ' Hourly '}
                 <span className="text-xl pl-5 cursor-pointer" onClick={() => toggle()}> &gt;</span></h1>
               {daily ? <Daily forecast={props.forecast}/> : <Hourly forecast={props.forecast}/>}
-            </div>
+            </div> 
           </div>
-      </header>
+      </header> : <h1 className="text-white mt-4">City Not Found!</h1>}
+      </>
     )
   }
 

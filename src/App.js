@@ -8,15 +8,17 @@ function App() {
   let today = new Date()
 
   const [city, setCity] = useState();
+  const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(city)
   const [forecast, setForecast] = useState(city)
 
   const handleInput = (event) => {
     setCity(event.target.value)
-    console.log(city)
   }
 
- const handleSearch = () => {
+  // Sends user input to Weather API
+  const handleSearch = () => {
+      setLoading(true)
       fetch(`http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API}&q=${city}`)
       // Grabs data from api
       .then(response => response.json())
@@ -29,8 +31,14 @@ function App() {
           // Converts to json file
       .then(setForecast);
           // sets data state to the json
+      setLoading(false)
+      
   }
-  
+
+  if(loading) {
+    return <h1 className="text-4xl pt-10 font-bold ">Loading...</h1>
+  }
+
   return (
     <div className={`App font-sans ${current?.current?.is_day === 1? 'bg-white' : 'bg-gray-900'}`}>
       <h1 className={`text-4xl pt-10 font-bold ${current?.current?.is_day === 1? 'text-gray-800' : 'text-white'}`}>Hello Weather!</h1>
